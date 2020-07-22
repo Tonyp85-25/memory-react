@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -34,5 +34,34 @@
   }
   to {
     transform: rotate(360deg);
+  } 
+}*/
+
+
+
+.board {
+    margin: auto;
+    width: 780px;
+    height: 460px;
+    background-color: #ddf; 
+    padding: 10px 0 0 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
+.card {
+  width: 100px;
+  height: 100px;
+  background-color: #aaa;
+  margin-right: 10px;
+}
+
+.card:hover {
+  background-color: #656262;
+}
+
+.image { 
+background-color: white;
+background-image: url("./images/cards.png");
+
 }
