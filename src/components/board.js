@@ -7,6 +7,7 @@ const cards = []
     for (let index = 0; index < 2; index++) {
       for (let i = 0; i < 14; i++) {
         cards.push({
+            id : (index+1)*(i+1),
             fruit:{name:fruits[i],position:setPosition(fruits,fruits[i])},
             action: turnOn,
             className :'card',
@@ -19,7 +20,7 @@ const cards = []
 
 export const Board = () => {
     return <div className= "board"> {cards.map( (ele,idx)=>
-      Card({id:idx, fruit:{name:ele.fruit.name,position:ele.fruit.position}, turnCard:ele.action, className:ele.className, clickable:ele.clickable}))}</div>
+      Card({id:ele.id, fruit:{name:ele.fruit.name,position:ele.fruit.position}, turnCard:ele.action, className:ele.className, clickable:ele.clickable}))}</div>
   }
   
   

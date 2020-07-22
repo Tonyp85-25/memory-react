@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {Card} from '../../components/card'
 
 const mapStateToProps = (state,ownProps) => ({
     id: state.id,
