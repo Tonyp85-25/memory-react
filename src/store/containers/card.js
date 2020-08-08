@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {Card} from '../../components/card'
+import {turnOn} from '../ducks/card'
 
 const mapStateToProps = (state,ownProps) => ({
     id: state.id,
@@ -13,4 +14,4 @@ const mapDispatchToProps = dispatch =>({
 })
 
 /* Container*/ 
-const cardContainer = connect(mapStateToProps, mapDispatchToProps)(Card)
+ export const cardContainer = connect(mapStateToProps, mapDispatchToProps)(Card)

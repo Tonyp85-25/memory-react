@@ -1,17 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
-import {Card} from './components/card';
-import {Board} from './components/board';
-
-
-
+import {BoardContainer} from './store/containers/board' ;
+ 
 
 function App() {
   return (
-          <Board>
-            
-          </Board>
+          <BoardContainer>
+           
+          </BoardContainer>
 
 
 

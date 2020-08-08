@@ -6,12 +6,29 @@ import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import { memoryApp } from './store/ducks';
+import {fruits, setPosition ,shuffle} from './data'
+import {turnOn} from './store/ducks/card'
 
-const store = createStore(memoryApp)
+const pcards = []
+    for (let index = 0; index < 2; index++) {
+      for (let i = 0; i < 14; i++) {
+        pcards.push({
+            id : (index+1)*(i+1),
+            fruit:{name:fruits[i],position:setPosition(fruits,fruits[i])},
+            action: turnOn,
+            className :'card',
+            clickable: true
+        })
+        //Card({id:i*index, fruit:{name:fruits[i],position:setPosition(fruits,fruits[i])}});  
+      }  
+    }
+    shuffle(pcards)
+const initState = {cards:{pcards}/*, pairs:['',''], count:0*/}
+const store = createStore(memoryApp,initState)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App></App>
   </Provider>,
   document.getElementById('root')
 );

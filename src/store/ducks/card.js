@@ -1,28 +1,29 @@
 
 
-const initCount = 0
+let initCount = 0
 const initialState = {id:undefined,className :'card',count:initCount ,clickable :true}
 
 //action creator
-export const turnOn =(id,initClickable)=>( {
+export const turnOn =(id,initClickable,fruit)=>( {
     type:'TURN_ON',
     id: id,
     clickable: initClickable,
+    fruit
 })
 
-export const card = (initialState,action) => { 
+export const card = (state,action) => { 
     switch(action.type){
         case 'TURN_ON':
             if(action.clickable){
-                return {id: action.id, className:'card image', count : initCount++ , clickable:false}
+                return {id: action.id, className:'card image', count : initCount++ , clickable:false, fruit: action.fruit}
             }else{
-                return initialState
+                return state
             }
             
         // case 'TURN_BACK':
         //     return turnBack(action.id)
         default:
-            return initialState
+            return state
     }
 }
 
@@ -36,7 +37,7 @@ export const cards = (state = [], action) => {
                 return state
             }
         default:
-                return initialState
+                return state
     }
 }
 
