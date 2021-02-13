@@ -1,14 +1,20 @@
 import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import {BoardContainer} from './store/containers/board' ;
+import {Board} from './store/containers/board' ;
+import {Timer} from './components/timer'
  
 
 function App() {
   return (
-          <BoardContainer>
+    <div>
+ <Board></Board>
+ <Timer/>
+    </div>
+         
            
-          </BoardContainer>
+          
+
 
 
 

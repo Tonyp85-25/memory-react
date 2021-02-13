@@ -1,14 +1,22 @@
 import { connect } from 'react-redux';
 //import { bindActionCreators } from 'redux';
-import {Board} from '../../components/board'
 
-const mapStateToProps = (state,ownProps) => ({
-    cards : state.cards,
-    pairs : state.pairs
-})
+import React from 'react';
+//import {cardContainer} from '../store/containers/card';
 
-const mapDispatchToProps = dispatch =>({
+
+export const Board = ({playedCards=[]}) => {
+    return <div className="board"> {/*playedCards.map( (ele,idx)=>
+    cardContainer({id:ele.id, fruit:{name:ele.fruit.name,position:ele.fruit.position}, turnCard:ele.action, className:ele.className, clickable:ele.clickable}))*/}</div>
+  }
+  
+// const mapStateToProps = (state,ownProps) => ({
+//     cards : state.cards,
+//     pairs : state.pairs
+// })
+
+// const mapDispatchToProps = dispatch =>({
         
-})
+// })
 
-export const BoardContainer = connect(mapStateToProps,mapDispatchToProps)(Board)
+export default /*connect(mapStateToProps,mapDispatchToProps)*/(Board)
