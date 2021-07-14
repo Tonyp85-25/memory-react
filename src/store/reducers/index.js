@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import {cards} from './card'
-import {board} from './board'
+import {count} from './count'
 
 export const memoryApp = combineReducers({
     cards,
-    board
+    count,
 })

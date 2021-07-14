@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { connect,useStore } from 'react-redux';
 //import { bindActionCreators } from 'redux';
 
 import React from 'react';

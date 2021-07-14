@@ -15,7 +15,7 @@ export const card = (state,action) => {
     switch(action.type){
         case 'TURN_ON':
             if(action.clickable){
-                return {id: action.id, className:'card image', count : initCount++ , clickable:false, fruit: action.fruit}
+                return {id: action.id, className:'card image', clickable:false, fruit: action.fruit}
             }else{
                 return state
             }

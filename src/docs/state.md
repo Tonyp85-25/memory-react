@@ -3,7 +3,7 @@
 |Nom |Type|Description|Commentaires|
 |-|-|-|-|-|
 |cards| Card []| tableau contenant nos cartes|
-|currentCount|Number|nombre de cartes jouées au tour  actuel| doit etre égal 2 maxi et remis à zéro ensuite
+|count|Number|nombre de cartes jouées au tour  actuel| doit etre égal 2 maxi et remis à zéro ensuite
 |pairs|Number|nombres de paires de cartes jouées en tout| permet de finir la partie si le joueur a gagné
 |difficulty|String|difficulté du jeu|
 
