@@ -1,6 +1,6 @@
 export const fruits  = ['apple','banana','orange','lime','fig', 'apricot', 'lemon', 'strawberry','green-apple','peach','grape','watermellon','plum','pear'];
 
-export const setPosition= (pArray, value)=>{
+export const getPosition= (pArray, value)=>{
     let index = pArray.indexOf(value)
     return '0px '+index*100+'px'
 }
