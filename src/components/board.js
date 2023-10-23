@@ -3,13 +3,17 @@ import React, {useEffect, useMemo, useRef, useState} from "react";
 import Card from "./card";
 import {fruits, getPosition, shuffle} from "../data";
 
+const numberofCards ={
+    easy:28,
+    hard:32
+}
+const Board = ({difficulty}) => {
 
-const Board = () => {
     const initialCards = useMemo(()=>{
     const pcards = [];
     let count = 1;
     for (let index = 0; index < 2; index++) {
-      for (let i = 0; i < 14; i++) {
+      for (let i = 0; i < numberofCards[difficulty]/2; i++) {
         pcards.push({
           id: count,
           fruit: { name: fruits[i], position: getPosition(fruits, fruits[i]) },

@@ -8,7 +8,7 @@ const Card = (props) => {
   };
 
   return (
-    <div className={className} onClick={handleClick} style={cardStyle}>
+    <div className={className} onClick={handleClick} style={cardStyle} role={"button"}>
       {" "}
       {renderCount.current++} time(s)
     </div>
