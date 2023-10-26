@@ -7,8 +7,8 @@ import Timer from "./components/timer";
 function App() {
   return (
     <div>
-      <Board difficulty={"easy"}/>
-      <Timer />
+      <Board difficulty={"easy"} />
+      <Timer difficulty={"easy"} />
     </div>
   );
 }
