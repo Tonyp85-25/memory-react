@@ -23,7 +23,7 @@ const Timer = ({ difficulty }) => {
     };
   }, [difficulty, count, timeUp]);
 
-  return <progress value={count} max={98} />;
+  return <progress value={count + 1} max={99} />;
 };
 
 export default Timer;
