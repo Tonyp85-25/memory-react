@@ -12,7 +12,8 @@
     "serve": "vite preview",
     "test": "jest",
     "lint": "eslint src",
-    "prettier": "prettier --write ."
+    "prettier": "prettier . --write",
+    "checks": "eslint src && prettier . --list-different"
   },
   "jest": {
     "testEnvironment": "jsdom",
