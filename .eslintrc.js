@@ -19,6 +19,9 @@ module.exports = {
       version: "17.0.2",
     },
   },
+  rules: {
+    "react:prop-types": "off",
+  },
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
