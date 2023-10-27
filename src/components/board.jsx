@@ -38,7 +38,6 @@ const Board = ({ difficulty }) => {
         ...currentFruits,
         { fruit: newCards[index].fruit.name, index },
       ]);
-      console.log(currentFruits);
       setCards(newCards);
     }
   };

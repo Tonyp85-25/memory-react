@@ -1,13 +1,3 @@
-import React from 'react';
+test("should render board", () => {});
 
-import App from './App';
-
-
-test('should render board', () => {
-  
-})
-
-test('should render timer', () => {
-  
-})
-
+test("should render timer", () => {});

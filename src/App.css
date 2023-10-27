@@ -37,18 +37,16 @@
   } 
 }*/
 
-
-
 .board {
-    margin: auto;
-    width: 780px;
-    height: 460px;
-    background-color: #ddf; 
-    padding: 10px 0 0 10px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
+  margin: auto;
+  width: 780px;
+  height: 460px;
+  background-color: #ddf;
+  padding: 10px 0 0 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 .card {
   width: 100px;
   height: 100px;
@@ -60,8 +58,7 @@
   background-color: #656262;
 }
 
-.image { 
-background-color: white;
-background-image: url("./images/cards.png");
-
+.image {
+  background-color: white;
+  background-image: url("./images/cards.png");
 }

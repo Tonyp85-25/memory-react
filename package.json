@@ -10,7 +10,9 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint src",
+    "prettier": "prettier --write ."
   },
   "jest": {
     "testEnvironment": "jsdom",
@@ -46,10 +48,16 @@
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.5.1",
     "@vitejs/plugin-react": "2.2.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-jest": "^27.6.0",
+    "eslint-plugin-jest-dom": "^5.1.0",
+    "eslint-plugin-react": "^7.33.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-svg-transformer": "^1.0.0",
+    "prettier": "^3.0.3",
     "vite": "3.2.7",
     "vite-plugin-svgr": "0.3.0"
   },
