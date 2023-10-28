@@ -1,0 +1,15 @@
+.card {
+  width: 100px;
+  height: 100px;
+  background-color: #aaa;
+  margin-right: 10px;
+}
+
+.card:hover {
+  background-color: #656262;
+}
+
+.image {
+  background-color: white;
+  background-image: url("../images/cards.png");
+}

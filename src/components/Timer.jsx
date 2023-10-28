@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import styles from "./timer.module.css";
 
 export const GAME_DURATION = {
   easy: 60000,
@@ -7,23 +8,29 @@ export const GAME_DURATION = {
 const Timer = ({ difficulty }) => {
   const [timeUp, setTimeUp] = useState(false);
   const [count, setCount] = useState(0);
+  const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
-    let interval = null;
     if (!timeUp) {
-      interval = setInterval(() => {
+      intervalRef.current = setInterval(() => {
         setCount(count + 1);
       }, GAME_DURATION[difficulty] / 100);
-      setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         setTimeUp(true);
       }, GAME_DURATION[difficulty]);
     }
     return function () {
-      clearInterval(interval);
+      clearInterval(intervalRef.current);
+      clearTimeout(timeoutRef.current);
     };
   }, [difficulty, count, timeUp]);
 
-  return <progress value={count + 1} max={99} />;
+  return (
+    <div className={styles.timer}>
+      <progress value={count + 1} max={99} />
+    </div>
+  );
 };
 
 export default Timer;

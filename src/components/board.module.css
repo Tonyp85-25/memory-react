@@ -1,0 +1,16 @@
+.board {
+  margin: auto;
+  height: 460px;
+  background-color: #ddf;
+  padding: 10px 0 0 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.easy {
+  width: 780px;
+}
+.hard {
+  width: 1000px;
+}

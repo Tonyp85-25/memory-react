@@ -1,14 +1,28 @@
-import React from "react";
-//import logo from './logo.svg';
-import "./App.css";
-import Board from "./components/board";
-import Timer from "./components/timer";
+import React, { useState } from "react";
+import styles from "./App.module.css";
+import Game from "./components/Game";
 
 function App() {
+  const [difficulty, setDifficulty] = useState(null);
+
   return (
-    <div>
-      <Board difficulty={"easy"} />
-      <Timer difficulty={"easy"} />
+    <div className={styles.App}>
+      <h1>Memory game</h1>
+      <div className={styles.buttons}>
+        <button
+          onClick={() => setDifficulty("easy")}
+          disabled={difficulty === "easy"}
+        >
+          Easy
+        </button>
+        <button
+          onClick={() => setDifficulty("hard")}
+          disabled={difficulty === "hard"}
+        >
+          Hard
+        </button>
+      </div>
+      {difficulty && <Game difficulty={difficulty} />}
     </div>
   );
 }

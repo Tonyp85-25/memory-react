@@ -1,6 +1,5 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import Timer, { GAME_DURATION } from "./timer";
+import Timer, { GAME_DURATION } from "../Timer";
 
 const originalError = console.error;
 beforeAll(() => {

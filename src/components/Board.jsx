@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import Card from "./card";
+import Card from "./Card";
 import { fruits, getPosition, shuffle } from "../data";
+import styles from "./board.module.css";
+import cardStyles from "./card.module.css";
 
 export const numberOfCards = {
   easy: 28,
@@ -15,7 +17,7 @@ const Board = ({ difficulty }) => {
         pcards.push({
           id: count,
           fruit: { name: fruits[i], position: getPosition(fruits, fruits[i]) },
-          className: "card",
+          className: cardStyles.card,
           isClickable: true,
         });
         count++;
@@ -23,7 +25,7 @@ const Board = ({ difficulty }) => {
     }
     shuffle(pcards);
     return pcards;
-  }, []);
+  }, [difficulty]);
   const [cards, setCards] = useState(initialCards);
 
   const [currentFruits, setCurrentFruits] = useState([]);
@@ -32,7 +34,7 @@ const Board = ({ difficulty }) => {
   const onCardClick = (index) => {
     if (cards[index].isClickable && canClick === true) {
       const newCards = [...cards];
-      newCards[index].className = "card image";
+      newCards[index].className = `${cardStyles.card} ${cardStyles.image}`;
       newCards[index].isClickable = false;
       setCurrentFruits([
         ...currentFruits,
@@ -48,9 +50,9 @@ const Board = ({ difficulty }) => {
       timeout = setTimeout(() => {
         if (currentFruits[0].fruit !== currentFruits[1].fruit) {
           const newCards = [...cards];
-          newCards[currentFruits[0].index].className = "card";
+          newCards[currentFruits[0].index].className = cardStyles.card;
           newCards[currentFruits[0].index].isClickable = true;
-          newCards[currentFruits[1].index].className = "card";
+          newCards[currentFruits[1].index].className = cardStyles.card;
           newCards[currentFruits[1].index].isClickable = true;
           setCards(newCards);
         }
@@ -62,9 +64,8 @@ const Board = ({ difficulty }) => {
       clearTimeout(timeout);
     };
   }, [currentFruits]);
-  const renderCount = useRef(0);
   return (
-    <div className="board">
+    <div className={`${styles.board} ${styles[difficulty]}`}>
       {cards.map((card, index) => (
         <Card
           id={card.id}
@@ -75,9 +76,6 @@ const Board = ({ difficulty }) => {
           handleClick={() => onCardClick(index)}
         />
       ))}
-      <span className="dark:text-green-300 text-grey-900">
-        {renderCount.current++} time(s)
-      </span>
     </div>
   );
 };

@@ -1,6 +1,5 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import Board, { numberOfCards } from "./board";
+import Board, { numberOfCards } from "../Board";
 
 describe("should render board according to difficulty level", () => {
   test("should render with 28 cards in easy level", () => {
