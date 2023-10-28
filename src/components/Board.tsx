@@ -47,7 +47,9 @@ const Board = ({ difficulty }: { difficulty: Difficulty }) => {
 
   const [currentFruits, setCurrentFruits] = useState<CurrentFruit[]>([]);
   const [canClick, setCanClick] = useState(true);
-  const timeoutRef = useRef<number | null>(null);
+  // necessary to pass ci, otherwise tsc will assume that we are using NodeJS setTimeout
+  // https://stackoverflow.com/questions/45802988/typescript-use-correct-version-of-settimeout-node-vs-window
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const onCardClick = (index: number) => {
     if (cards[index].isClickable && canClick === true) {

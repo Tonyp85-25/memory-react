@@ -9,15 +9,15 @@ export const GAME_DURATION = {
 const Timer = ({ difficulty }: { difficulty: Difficulty }) => {
   const [timeUp, setTimeUp] = useState(false);
   const [count, setCount] = useState(0);
-  const intervalRef = useRef<number | null>(null);
-  const timeoutRef = useRef<number | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (!timeUp) {
-      intervalRef.current = window.setInterval(() => {
+      intervalRef.current = setInterval(() => {
         setCount(count + 1);
       }, GAME_DURATION[difficulty] / 100);
-      timeoutRef.current = window.setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         setTimeUp(true);
       }, GAME_DURATION[difficulty]);
     }
