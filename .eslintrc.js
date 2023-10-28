@@ -4,8 +4,14 @@ module.exports = {
     es2021: true,
     "jest/globals": true,
   },
-  plugins: ["react"],
-  extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
+  plugins: ["react", "react-refresh"],
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier",
+  ],
   overrides: [
     {
       files: ["test/**"],
@@ -19,9 +25,7 @@ module.exports = {
       version: "17.0.2",
     },
   },
-  rules: {
-    "react:prop-types": "off",
-  },
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
