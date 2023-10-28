@@ -1,6 +1,6 @@
-import React from "react";
 import Board from "./Board";
 import Timer from "./Timer";
+import { Difficulty } from "../App";
 
 const EasyBoard = () => {
   return (
@@ -22,7 +22,7 @@ const components = {
   easy: EasyBoard,
   hard: HardBoard,
 };
-const Game = ({ difficulty }) => {
+const Game = ({ difficulty }: { difficulty: Difficulty }) => {
   const BoardComponent = components[difficulty];
   return <BoardComponent />;
 };

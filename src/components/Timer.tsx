@@ -1,15 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./timer.module.css";
+import { type Difficulty } from "../App";
 
 export const GAME_DURATION = {
   easy: 60000,
   hard: 90000,
 };
-const Timer = ({ difficulty }) => {
+const Timer = ({ difficulty }: { difficulty: Difficulty }) => {
   const [timeUp, setTimeUp] = useState(false);
   const [count, setCount] = useState(0);
-  const intervalRef = useRef(null);
-  const timeoutRef = useRef(null);
+  const intervalRef = useRef<number | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!timeUp) {
@@ -21,8 +22,12 @@ const Timer = ({ difficulty }) => {
       }, GAME_DURATION[difficulty]);
     }
     return function () {
-      clearInterval(intervalRef.current);
-      clearTimeout(timeoutRef.current);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     };
   }, [difficulty, count, timeUp]);
 

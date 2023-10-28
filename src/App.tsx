@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./App.module.css";
 import Game from "./components/Game";
 
+const Difficulties = ["easy", "hard"] as const;
+export type Difficulty = (typeof Difficulties)[number];
 function App() {
-  const [difficulty, setDifficulty] = useState(null);
+  const [difficulty, setDifficulty] = useState<Difficulty | null>(null);
 
   return (
     <div className={styles.App}>

@@ -13,14 +13,15 @@ export const fruits = [
   "watermellon",
   "plum",
   "pear",
-];
+] as const;
 
-export const getPosition = (pArray, value) => {
-  let index = pArray.indexOf(value);
+export type FruitName = (typeof fruits)[number];
+export const getPosition = (pArray: typeof fruits, value: FruitName) => {
+  const index = pArray.indexOf(value);
   return "0px " + index * 100 + "px";
 };
 
-export const shuffle = (a) => {
+export const shuffle = (a: Array<any>) => {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];

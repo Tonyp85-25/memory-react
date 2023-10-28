@@ -8,12 +8,13 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build",
+    "build": "tsc --noEmit && vite build",
     "serve": "vite preview",
     "test": "jest",
+    "tsc": "tsc --noEmit",
     "lint": "eslint src",
     "prettier": "prettier . --write",
-    "checks": "eslint src && prettier . --list-different"
+    "checks": "tsc --noEmit && eslint src && prettier . --list-different"
   },
   "browserslist": {
     "production": [

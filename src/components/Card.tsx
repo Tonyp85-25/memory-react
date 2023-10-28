@@ -1,8 +1,13 @@
-import React, { useRef } from "react";
+import { type Fruit } from "./Board";
 
-const Card = (props) => {
+interface CardProps {
+  fruit: Fruit;
+  className: string;
+  handleClick: VoidFunction;
+}
+
+const Card = (props: CardProps) => {
   const { fruit, className, handleClick } = props;
-  const renderCount = useRef(0);
   const cardStyle = {
     backgroundPosition: fruit.position,
   };
@@ -13,10 +18,7 @@ const Card = (props) => {
       onClick={handleClick}
       style={cardStyle}
       role={"button"}
-    >
-      {" "}
-      {renderCount.current++} time(s)
-    </div>
+    ></div>
   );
 };
 
