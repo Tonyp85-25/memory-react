@@ -14,10 +14,10 @@ const Timer = ({ difficulty }: { difficulty: Difficulty }) => {
 
   useEffect(() => {
     if (!timeUp) {
-      intervalRef.current = setInterval(() => {
+      intervalRef.current = window.setInterval(() => {
         setCount(count + 1);
       }, GAME_DURATION[difficulty] / 100);
-      timeoutRef.current = setTimeout(() => {
+      timeoutRef.current = window.setTimeout(() => {
         setTimeUp(true);
       }, GAME_DURATION[difficulty]);
     }

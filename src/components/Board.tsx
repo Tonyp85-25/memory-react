@@ -64,7 +64,7 @@ const Board = ({ difficulty }: { difficulty: Difficulty }) => {
   useEffect(() => {
     if (currentFruits.length === 2) {
       setCanClick(false);
-      timeoutRef.current = setTimeout(() => {
+      timeoutRef.current = window.setTimeout(() => {
         if (currentFruits[0].fruit !== currentFruits[1].fruit) {
           const newCards = [...cards];
           newCards[currentFruits[0].index].className = cardStyles.card;
