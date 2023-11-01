@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./App.module.css";
-import Game from "./components/Game";
+import Game from "./Game";
 
 const Difficulties = ["easy", "hard"] as const;
 export type Difficulty = (typeof Difficulties)[number];
