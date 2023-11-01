@@ -2,9 +2,8 @@ import { useContext } from "react";
 import Card from "./Card";
 import styles from "./board.module.css";
 import "./card.css";
-import { type Difficulty } from "./App";
-import { GameStateContext } from "./GameContext";
-import { CardType } from "../types";
+import { GameStateContext } from "../contexts/GameContext";
+import { type CardType, type Difficulty } from "../types";
 
 const Board = ({ difficulty }: { difficulty: Difficulty }) => {
   const { cards } = useContext(GameStateContext);

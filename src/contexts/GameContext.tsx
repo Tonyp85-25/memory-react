@@ -1,6 +1,13 @@
-import { Dispatch, ReactElement, createContext, useReducer } from "react";
+import {
+  Dispatch,
+  ReactElement,
+  createContext,
+  useEffect,
+  useReducer,
+  useRef,
+} from "react";
 import { ActionTypes } from "../actions";
-import { Difficulty } from "./App";
+import { Difficulty } from "../types";
 import {
   areCardsEquals,
   areFruitsDifferent,
@@ -15,6 +22,7 @@ import {
   LimitedArray,
   fruits,
 } from "../types";
+import { GAME_DURATION } from "../components/Timer";
 
 export const numberOfCards = {
   easy: 28,
@@ -64,7 +72,18 @@ export function GameProvider({
     difficulty,
     getInitialGameState,
   );
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  useEffect(() => {
+    timeoutRef.current = setTimeout(() => {
+      dispatch({ type: ActionTypes.TIME_UP });
+    }, GAME_DURATION[difficulty]);
+    return function () {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [difficulty]);
   if (game === null) {
     return null;
   }

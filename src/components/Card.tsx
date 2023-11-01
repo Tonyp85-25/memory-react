@@ -1,6 +1,6 @@
 import { Dispatch, useCallback, useContext } from "react";
 
-import { GameDispatchContext, GameStateContext } from "./GameContext";
+import { GameDispatchContext, GameStateContext } from "../contexts/GameContext";
 import { checkCards } from "../helpers";
 import { DispatchFn, Fruit, GameAction, GameState } from "../types";
 
@@ -22,11 +22,7 @@ const Card = (props: CardProps) => {
     GameStateContext,
   ) as GameState;
   const handleClick = useCallback(() => {
-    console.log(currentFruits);
-
     if (!cards[index].isClickable || !canClick) {
-      console.log("hello");
-
       return;
     } else {
       dispatch(checkCards(currentFruits, index));

@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { ActionTypes } from "./actions";
 
-import { Difficulty } from "./components/App";
+import { Difficulty } from "./types";
 import { GAME_DURATION } from "./components/Timer";
 import {
   CurrentFruit,

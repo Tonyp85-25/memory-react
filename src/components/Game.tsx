@@ -1,7 +1,7 @@
 import Board from "./Board";
 import Timer from "./Timer";
-import { Difficulty } from "./App";
-import { GameProvider, GameStateContext } from "./GameContext";
+import { Difficulty } from "../types";
+import { GameProvider, GameStateContext } from "../contexts/GameContext";
 import { useContext } from "react";
 
 const EasyBoard = () => {

@@ -1,9 +1,7 @@
-import { Dispatch, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./timer.module.css";
-import { type Difficulty } from "./App";
-import { GameDispatchContext, GameStateContext } from "./GameContext";
-import { checkTime } from "../helpers";
-import { DispatchFn, GameAction } from "../types";
+import { type Difficulty } from "../types";
+import { GameStateContext } from "../contexts/GameContext";
 
 export const GAME_DURATION = {
   easy: 60000,
@@ -11,12 +9,10 @@ export const GAME_DURATION = {
 };
 const Timer = ({ difficulty }: { difficulty: Difficulty }) => {
   const { timeUp } = useContext(GameStateContext);
-  const dispatch = useContext(GameDispatchContext) as Dispatch<
-    GameAction | DispatchFn
-  >;
+
   const [count, setCount] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  dispatch(checkTime(difficulty));
+
   useEffect(() => {
     if (!timeUp) {
       intervalRef.current = setInterval(() => {

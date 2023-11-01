@@ -47,6 +47,8 @@ export const fruits = [
   "yellow-cherry",
 ] as const;
 
+const Difficulties = ["easy", "hard"] as const;
+export type Difficulty = (typeof Difficulties)[number];
 export type FruitName = (typeof fruits)[number];
 export type DispatchFn = (dispatch: Dispatch<GameAction>) => void;
 

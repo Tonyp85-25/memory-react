@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../test-utils/testing-library-utils";
 import Timer, { GAME_DURATION } from "../Timer";
 
 const originalError = console.error;
@@ -23,14 +23,14 @@ afterEach(() => {
 });
 describe("progress bar gets filled according to difficulty level duration", () => {
   test("progress bar gets filled in one minute in easy level", async () => {
-    render(<Timer difficulty={"easy"} />);
+    render(<Timer difficulty={"easy"} />, "easy");
     jest.advanceTimersByTime(GAME_DURATION["easy"]);
     const progressBar = screen.getByRole("progressbar");
 
     expect(progressBar.getAttribute("value")).toBe("100");
   });
   test("progress bar gets filled in one minute and half in hard level", () => {
-    render(<Timer difficulty={"hard"} />);
+    render(<Timer difficulty={"hard"} />, "hard");
     jest.advanceTimersByTime(GAME_DURATION["hard"]);
     const progressBar = screen.getByRole("progressbar");
 
