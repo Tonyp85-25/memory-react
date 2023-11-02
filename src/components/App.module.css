@@ -4,11 +4,3 @@
   align-items: center;
   margin-top: 20vh;
 }
-
-.buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 180px;
-  margin-bottom: 2vh;
-}

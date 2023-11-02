@@ -1,29 +1,25 @@
-import { useState } from "react";
-import styles from "./App.module.css";
 import Game from "./Game";
-import { Difficulty } from "../types";
+
+import Navigation from "./Navigation";
+import Home from "./Home";
+
+import { Route, Switch } from "react-router-dom";
 
 function App() {
-  const [difficulty, setDifficulty] = useState<Difficulty | null>(null);
-
   return (
-    <div className={styles.App}>
-      <h1>Memory game</h1>
-      <div className={styles.buttons}>
-        <button
-          onClick={() => setDifficulty("easy")}
-          disabled={difficulty === "easy"}
-        >
-          Easy
-        </button>
-        <button
-          onClick={() => setDifficulty("hard")}
-          disabled={difficulty === "hard"}
-        >
-          Hard
-        </button>
-      </div>
-      {difficulty && <Game difficulty={difficulty} />}
+    <div>
+      <Navigation />
+      <Switch>
+        <Route path="/" exact={true}>
+          <Home />
+        </Route>
+        <Route path="/easy">
+          <Game difficulty="easy" />
+        </Route>
+        <Route path="/hard">
+          <Game difficulty="hard" />
+        </Route>
+      </Switch>
     </div>
   );
 }
