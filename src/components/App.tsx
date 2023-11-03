@@ -9,17 +9,19 @@ function App() {
   return (
     <div>
       <Navigation />
-      <Switch>
-        <Route path="/" exact={true}>
-          <Home />
-        </Route>
-        <Route path="/easy">
-          <Game difficulty="easy" />
-        </Route>
-        <Route path="/hard">
-          <Game difficulty="hard" />
-        </Route>
-      </Switch>
+      <main className="container">
+        <Switch>
+          <Route path="/" exact={true}>
+            <Home />
+          </Route>
+          <Route path="/easy">
+            <Game difficulty="easy" />
+          </Route>
+          <Route path="/hard">
+            <Game difficulty="hard" />
+          </Route>
+        </Switch>
+      </main>
     </div>
   );
 }

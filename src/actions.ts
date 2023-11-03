@@ -4,4 +4,6 @@ export enum ActionTypes {
   HAS_WON = "HAS_WON",
   TURN_UP = "TURN_UP",
   BEFORE_CHECK = "BEFORE_CHECK",
+  SUCCESS = "SUCCESS",
+  RESET = "RESET",
 }

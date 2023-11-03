@@ -23,6 +23,7 @@ import {
   fruits,
 } from "../types";
 import { GAME_DURATION } from "../components/Timer";
+import { enqueueSnackbar } from "notistack";
 
 export const numberOfCards = {
   easy: 28,
@@ -54,9 +55,8 @@ function getInitialGameState(difficulty: Difficulty): GameState {
     cards,
     timeUp: false,
     currentFruits: new LimitedArray([]),
-    hasWon: false,
     canClick: true,
-    message: "",
+    score: 0,
   };
 }
 
@@ -78,6 +78,14 @@ export function GameProvider({
     timeoutRef.current = setTimeout(() => {
       dispatch({ type: ActionTypes.TIME_UP });
     }, GAME_DURATION[difficulty]);
+
+    if (game.score === numberOfCards[difficulty] / 2) {
+      enqueueSnackbar("You won!", {
+        variant: "success",
+        anchorOrigin: { vertical: "bottom", horizontal: "center" },
+      });
+      dispatch({ type: ActionTypes.SUCCESS });
+    }
     return function () {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -101,8 +109,8 @@ function gameReducer(game: GameState, action: GameAction) {
     case ActionTypes.TURN_UP: {
       const newGame = { ...game };
       if (
-        game.currentFruits.head &&
-        areCardsEquals(game.currentFruits.head.index, action.index)
+        newGame.currentFruits.head &&
+        areCardsEquals(newGame.currentFruits.head.index, action.index)
       ) {
         return newGame;
       }
@@ -115,6 +123,7 @@ function gameReducer(game: GameState, action: GameAction) {
       });
       return newGame;
     }
+    case ActionTypes.SUCCESS:
     case ActionTypes.BEFORE_CHECK: {
       return { ...game, canClick: false };
     }
@@ -127,6 +136,8 @@ function gameReducer(game: GameState, action: GameAction) {
         newGame.cards[currentFruits.head.index].isClickable = true;
         newGame.cards[currentFruits.tail.index].className = cardStyles["back"];
         newGame.cards[currentFruits.tail.index].isClickable = true;
+      } else {
+        newGame.score++;
       }
 
       newGame.canClick = true;
@@ -134,6 +145,9 @@ function gameReducer(game: GameState, action: GameAction) {
     }
     case ActionTypes.TIME_UP: {
       return { ...game, canClick: false, message: "Game over!", timeUp: true };
+    }
+    case ActionTypes.RESET: {
+      return getInitialGameState(action.difficulty);
     }
     default:
       return game;

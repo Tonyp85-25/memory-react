@@ -24,7 +24,7 @@ export function withThunk(dispatch: Dispatch<GameAction>) {
 
 export function checkCards(
   currentFruits: LimitedArray<CurrentFruit>,
-  index: number,
+  index: number
 ): DispatchFn {
   return function (dispatch: Dispatch<GameAction>) {
     dispatch({ type: ActionTypes.TURN_UP, index });
@@ -47,7 +47,7 @@ export function checkTime(difficulty: Difficulty) {
 const SPRITE_SPACE = 100; // there is 100px between each sprite
 export const getPosition = (pArray: typeof fruits, value: FruitName) => {
   const index = pArray.indexOf(value);
-  return "0px " + (fruits.length - index) * SPRITE_SPACE + "px";
+  return "0px " + -index * SPRITE_SPACE + "px";
 };
 
 export const shuffle = (a: Array<any>): Array<any> => {
@@ -60,14 +60,14 @@ export const shuffle = (a: Array<any>): Array<any> => {
 
 export function areFruitsDifferent(
   fruit1: CurrentFruit,
-  fruit2: CurrentFruit,
+  fruit2: CurrentFruit
 ): boolean {
   return fruit1.fruit !== fruit2.fruit;
 }
 
 export function areCardsEquals(
   cardIndex1: number,
-  cardIndex2: number,
+  cardIndex2: number
 ): boolean {
   return cardIndex1 === cardIndex2;
 }

@@ -18,13 +18,15 @@ export interface GameState {
   cards: CardType[];
   timeUp: boolean;
   currentFruits: LimitedArray<CurrentFruit>;
-  hasWon: boolean;
   canClick: boolean;
-  message: string;
+  score: number;
 }
-export type SimpleAction = { type: Exclude<ActionTypes, ActionTypes.TURN_UP> };
+export type SimpleAction = {
+  type: Exclude<ActionTypes, ActionTypes.TURN_UP | ActionTypes.RESET>;
+};
 export type TurnUpAction = { type: ActionTypes.TURN_UP; index: number };
-export type GameAction = TurnUpAction | SimpleAction;
+export type ResetAction = { type: ActionTypes.RESET; difficulty: Difficulty };
+export type GameAction = TurnUpAction | SimpleAction | ResetAction;
 
 export const fruits = [
   "apple",

@@ -1,16 +1,7 @@
 .board {
   margin: auto;
-  height: 460px;
+  height: 440px;
   background-color: #ddf;
   padding: 10px 0 0 10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.easy {
-  width: 780px;
-}
-.hard {
-  width: 1000px;
+  border-radius: var(--border-radius);
 }

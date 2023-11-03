@@ -11,3 +11,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.card {
+  width: 100px;
+  height: 100px;
+  background-color: #aaa;
+  margin-right: 10px;
+  border: none;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card:hover {
+  background-color: #656262;
+}
+
+.image {
+  background-color: white;
+  background-image: url("./images/cards.png");
+}
+
+.reset-button {
+  width: 30%;
+  padding: 10px;
+  margin: auto;
+  margin-bottom: 10px;
+}

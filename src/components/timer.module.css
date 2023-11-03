@@ -1,5 +1,6 @@
 .timer {
-  width: 790px;
+  margin: auto;
+  padding: 10px;
 }
 .timer progress[value] {
   -webkit-appearance: none;

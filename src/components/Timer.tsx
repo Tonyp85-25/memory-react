@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./timer.module.css";
 import { type Difficulty } from "../types";
 import { GameStateContext } from "../contexts/GameContext";
+import { enqueueSnackbar } from "notistack";
 
 export const GAME_DURATION = {
   easy: 60000,
@@ -14,10 +15,16 @@ const Timer = ({ difficulty }: { difficulty: Difficulty }) => {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    if (!timeUp) {
+    if (!timeUp && count < 100) {
       intervalRef.current = setInterval(() => {
         setCount(count + 1);
       }, GAME_DURATION[difficulty] / 100);
+    } else {
+      enqueueSnackbar("Time's up!", {
+        variant: "error",
+        anchorOrigin: { vertical: "bottom", horizontal: "center" },
+      });
+      setCount(0);
     }
     return function () {
       if (intervalRef.current) {
