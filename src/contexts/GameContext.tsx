@@ -31,7 +31,7 @@ export const numberOfCards = {
 };
 export const GameStateContext = createContext<GameState>({} as GameState);
 export const GameDispatchContext = createContext<Dispatch<GameAction> | null>(
-  null
+  null,
 );
 
 const cardStyles = {
@@ -70,7 +70,7 @@ export function GameProvider({
   const [game, dispatch] = useReducer(
     gameReducer,
     difficulty,
-    getInitialGameState
+    getInitialGameState,
   );
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -91,7 +91,7 @@ export function GameProvider({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [difficulty]);
+  }, [difficulty, game.score]);
   if (game === null) {
     return null;
   }

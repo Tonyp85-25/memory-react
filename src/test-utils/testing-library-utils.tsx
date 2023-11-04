@@ -2,13 +2,18 @@ import { render, RenderOptions } from "@testing-library/react";
 import { ReactElement } from "react";
 import { GameProvider } from "../contexts/GameContext";
 import { Difficulty } from "../types";
+import { SnackbarProvider } from "notistack";
 
 const EasyGameProvider = ({ children }: { children: ReactElement }) => (
-  <GameProvider difficulty={"easy"}>{children}</GameProvider>
+  <SnackbarProvider>
+    <GameProvider difficulty={"easy"}>{children}</GameProvider>
+  </SnackbarProvider>
 );
 
 const HardGameProvider = ({ children }: { children: ReactElement }) => (
-  <GameProvider difficulty={"hard"}>{children}</GameProvider>
+  <SnackbarProvider>
+    <GameProvider difficulty={"hard"}>{children}</GameProvider>
+  </SnackbarProvider>
 );
 const renderWithContext = (
   ui: ReactElement,
