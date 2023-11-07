@@ -13,10 +13,11 @@
     "build": "tsc --noEmit && vite build",
     "serve": "vite preview",
     "test": "jest --watch",
+    "test_ci": "jest",
     "tsc": "tsc --noEmit",
     "lint": "eslint src",
     "prettier": "prettier . --write",
-    "checks": "tsc --noEmit && eslint src && prettier . --list-different"
+    "prettier_ci": "prettier . --list-different"
   },
   "browserslist": {
     "production": [
