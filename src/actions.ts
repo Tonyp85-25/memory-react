@@ -1,3 +1,13 @@
+import { Dispatch } from "react";
+import {
+  CurrentFruit,
+  Difficulty,
+  DispatchFn,
+  GameAction,
+  LimitedArray,
+} from "./types";
+import { GAME_DURATION } from "./components/Timer";
+
 export enum ActionTypes {
   CHECK_CARDS = "CHECK_CARDS",
   TIME_UP = "TIME_UP",
@@ -6,4 +16,34 @@ export enum ActionTypes {
   BEFORE_CHECK = "BEFORE_CHECK",
   SUCCESS = "SUCCESS",
   RESET = "RESET",
+}
+
+export function withThunk(dispatch: Dispatch<GameAction>) {
+  return (actionOrThunk: GameAction | DispatchFn) =>
+    typeof actionOrThunk === "function"
+      ? actionOrThunk(dispatch)
+      : dispatch(actionOrThunk);
+}
+
+export function checkCards(
+  currentFruits: LimitedArray<CurrentFruit>,
+  index: number,
+): DispatchFn {
+  return function (dispatch: Dispatch<GameAction>) {
+    dispatch({ type: ActionTypes.TURN_UP, index });
+    if (currentFruits.isFull()) {
+      dispatch({ type: ActionTypes.BEFORE_CHECK });
+      setTimeout(() => {
+        dispatch({ type: ActionTypes.CHECK_CARDS });
+      }, 1000);
+    }
+  };
+}
+
+export function checkTime(difficulty: Difficulty) {
+  return function (dispatch: Dispatch<GameAction>) {
+    setTimeout(() => {
+      dispatch({ type: ActionTypes.TIME_UP });
+    }, GAME_DURATION[difficulty]);
+  };
 }

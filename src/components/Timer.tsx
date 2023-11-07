@@ -19,13 +19,15 @@ const Timer = ({ difficulty }: { difficulty: Difficulty }) => {
       intervalRef.current = setInterval(() => {
         setCount(count + 1);
       }, GAME_DURATION[difficulty] / 100);
+    } else if (timeUp && count >= 99) {
+      setCount(0);
     } else {
       enqueueSnackbar("Time's up!", {
         variant: "error",
         anchorOrigin: { vertical: "bottom", horizontal: "center" },
       });
-      setCount(0);
     }
+
     return function () {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);

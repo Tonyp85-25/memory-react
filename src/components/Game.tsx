@@ -8,6 +8,7 @@ const EasyBoard = () => {
   const dispatch = useContext(GameDispatchContext) as Dispatch<GameAction>;
   return (
     <div className="container">
+      <h3>Difficulty: easy</h3>
       <button
         onClick={() =>
           dispatch({ type: ActionTypes.RESET, difficulty: "easy" })
@@ -26,6 +27,7 @@ const HardBoard = () => {
   const dispatch = useContext(GameDispatchContext) as Dispatch<GameAction>;
   return (
     <div>
+      <h3>Difficulty: hard</h3>
       <button
         onClick={() =>
           dispatch({ type: ActionTypes.RESET, difficulty: "hard" })

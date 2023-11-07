@@ -1,7 +1,7 @@
 import { Dispatch, useCallback, useContext } from "react";
 
 import { GameDispatchContext, GameStateContext } from "../contexts/GameContext";
-import { checkCards } from "../helpers";
+import { checkCards } from "../actions";
 import { DispatchFn, Fruit, GameAction, GameState } from "../types";
 
 interface CardProps {

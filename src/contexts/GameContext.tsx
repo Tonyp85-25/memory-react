@@ -6,14 +6,13 @@ import {
   useReducer,
   useRef,
 } from "react";
-import { ActionTypes } from "../actions";
+import { ActionTypes, withThunk } from "../actions";
 import { Difficulty } from "../types";
 import {
   areCardsEquals,
   areFruitsDifferent,
   getPosition,
   shuffle,
-  withThunk,
 } from "../helpers";
 import {
   CardType,
