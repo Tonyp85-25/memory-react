@@ -14,13 +14,7 @@ import {
   getPosition,
   shuffle,
 } from "../helpers";
-import {
-  CardType,
-  GameAction,
-  GameState,
-  LimitedArray,
-  fruits,
-} from "../types";
+import { CardType, GameAction, GameState, ArrayOfTwo, fruits } from "../types";
 import { GAME_DURATION } from "../components/Timer";
 import { enqueueSnackbar } from "notistack";
 
@@ -56,7 +50,7 @@ function getInitialGameState(options: GameOptions): GameState {
   return {
     cards,
     timeUp: false,
-    currentFruits: new LimitedArray([]),
+    currentFruits: new ArrayOfTwo([]),
     canClick: true,
     score: 0,
   };
@@ -131,7 +125,6 @@ function gameReducer(game: GameState, action: GameAction) {
     case ActionTypes.CHECK_CARDS: {
       const newGame = { ...game };
       const { cards, currentFruits } = newGame;
-
       if (areFruitsDifferent(currentFruits.head, currentFruits.tail)) {
         const { head, tail } = currentFruits;
         cards[head.index].className = cardStyles["back"];
@@ -141,7 +134,8 @@ function gameReducer(game: GameState, action: GameAction) {
       } else {
         newGame.score++;
       }
-      newGame.currentFruits = new LimitedArray([]);
+      newGame.cards = cards;
+      newGame.currentFruits = new ArrayOfTwo([]);
       newGame.canClick = true;
       return newGame;
     }

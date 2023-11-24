@@ -26,8 +26,8 @@ const Card = (props: CardProps) => {
 
     if (currentFruits.length === 0) {
       dispatch({ type: ActionTypes.TURN_UP, index });
-    } else if (currentFruits.length === 1) {
-      dispatch(checkCards(currentFruits, index));
+    } else {
+      dispatch(checkCards(index));
     }
   }, [cards, canClick, currentFruits, dispatch, index]);
 

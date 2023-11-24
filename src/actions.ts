@@ -1,11 +1,5 @@
 import { Dispatch } from "react";
-import {
-  CurrentFruit,
-  Difficulty,
-  DispatchFn,
-  GameAction,
-  LimitedArray,
-} from "./types";
+import { Difficulty, DispatchFn, GameAction } from "./types";
 import { GAME_DURATION } from "./components/Timer";
 
 export enum ActionTypes {
@@ -26,20 +20,13 @@ export function withThunk(dispatch: Dispatch<GameAction>) {
       : dispatch(actionOrThunk);
 }
 
-export function checkCards(
-  currentFruits: LimitedArray<CurrentFruit>,
-  index: number,
-): DispatchFn {
+export function checkCards(index: number): DispatchFn {
   return function (dispatch: Dispatch<GameAction>) {
     dispatch({ type: ActionTypes.TURN_UP, index });
-    console.log(currentFruits.isFull());
-
-    if (currentFruits.isFull()) {
-      dispatch({ type: ActionTypes.BEFORE_CHECK });
-      setTimeout(() => {
-        dispatch({ type: ActionTypes.CHECK_CARDS });
-      }, VALIDATION_TIME);
-    }
+    dispatch({ type: ActionTypes.BEFORE_CHECK });
+    setTimeout(() => {
+      dispatch({ type: ActionTypes.CHECK_CARDS });
+    }, VALIDATION_TIME);
   };
 }
 

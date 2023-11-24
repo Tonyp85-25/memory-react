@@ -17,7 +17,7 @@ export interface Fruit {
 export interface GameState {
   cards: CardType[];
   timeUp: boolean;
-  currentFruits: LimitedArray<CurrentFruit>;
+  currentFruits: ArrayOfTwo<CurrentFruit>;
   canClick: boolean;
   score: number;
 }
@@ -60,7 +60,7 @@ export interface GameOptions {
   shuffle: ShuffleFn;
 }
 
-export class LimitedArray<T> {
+export class ArrayOfTwo<T> {
   constructor(value: T[]) {
     this.data = value;
   }
@@ -70,8 +70,6 @@ export class LimitedArray<T> {
     return this.data.length;
   }
   isFull() {
-    console.log(this.data.length);
-
     return this.data.length === 2;
   }
 
