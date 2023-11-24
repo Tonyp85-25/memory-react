@@ -7,7 +7,7 @@ import {
   useRef,
 } from "react";
 import { ActionTypes, withThunk } from "../actions";
-import { Difficulty } from "../types";
+import { GameOptions } from "../types";
 import {
   areCardsEquals,
   areFruitsDifferent,
@@ -24,10 +24,11 @@ import {
 import { GAME_DURATION } from "../components/Timer";
 import { enqueueSnackbar } from "notistack";
 
-export const numberOfCards = {
+export const NUMBER_OF_CARDS = {
   easy: 28,
   hard: 36,
 };
+
 export const GameStateContext = createContext<GameState>({} as GameState);
 export const GameDispatchContext = createContext<Dispatch<GameAction> | null>(
   null,
@@ -37,10 +38,11 @@ const cardStyles = {
   back: "card",
   up: "card image",
 };
-function getInitialGameState(difficulty: Difficulty): GameState {
+function getInitialGameState(options: GameOptions): GameState {
   const cards: CardType[] = [];
+  const { difficulty, shuffle } = options;
   for (let index = 0; index < 2; index++) {
-    for (let i = 0; i < numberOfCards[difficulty] / 2; i++) {
+    for (let i = 0; i < NUMBER_OF_CARDS[difficulty] / 2; i++) {
       cards.push({
         fruit: { name: fruits[i], position: getPosition(fruits, fruits[i]) },
         className: cardStyles["back"],
@@ -48,6 +50,7 @@ function getInitialGameState(difficulty: Difficulty): GameState {
       });
     }
   }
+
   shuffle(cards);
 
   return {
@@ -61,24 +64,24 @@ function getInitialGameState(difficulty: Difficulty): GameState {
 
 export function GameProvider({
   children,
-  difficulty,
+  options,
 }: {
   children: ReactElement;
-  difficulty: Difficulty;
+  options: GameOptions;
 }) {
   const [game, dispatch] = useReducer(
     gameReducer,
-    difficulty,
+    options,
     getInitialGameState,
   );
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
+  const { difficulty } = options;
   useEffect(() => {
     timeoutRef.current = setTimeout(() => {
       dispatch({ type: ActionTypes.TIME_UP });
     }, GAME_DURATION[difficulty]);
 
-    if (game.score === numberOfCards[difficulty] / 2) {
+    if (game.score === NUMBER_OF_CARDS[difficulty] / 2) {
       enqueueSnackbar("You won!", {
         variant: "success",
         anchorOrigin: { vertical: "bottom", horizontal: "center" },
@@ -106,14 +109,13 @@ export function GameProvider({
 function gameReducer(game: GameState, action: GameAction) {
   switch (action.type) {
     case ActionTypes.TURN_UP: {
-      const newGame = { ...game };
       if (
-        newGame.currentFruits.head &&
-        areCardsEquals(newGame.currentFruits.head.index, action.index)
+        game.currentFruits.head &&
+        areCardsEquals(game.currentFruits.head.index, action.index)
       ) {
-        return newGame;
+        return game;
       }
-
+      const newGame = { ...game };
       newGame.cards[action.index].className = cardStyles["up"];
       newGame.cards[action.index].isClickable = false;
       newGame.currentFruits.push({
@@ -128,17 +130,18 @@ function gameReducer(game: GameState, action: GameAction) {
     }
     case ActionTypes.CHECK_CARDS: {
       const newGame = { ...game };
-      const { currentFruits } = game;
-      newGame.currentFruits = new LimitedArray([]);
+      const { cards, currentFruits } = newGame;
+
       if (areFruitsDifferent(currentFruits.head, currentFruits.tail)) {
-        newGame.cards[currentFruits.head.index].className = cardStyles["back"];
-        newGame.cards[currentFruits.head.index].isClickable = true;
-        newGame.cards[currentFruits.tail.index].className = cardStyles["back"];
-        newGame.cards[currentFruits.tail.index].isClickable = true;
+        const { head, tail } = currentFruits;
+        cards[head.index].className = cardStyles["back"];
+        cards[head.index].isClickable = true;
+        cards[tail.index].className = cardStyles["back"];
+        cards[tail.index].isClickable = true;
       } else {
         newGame.score++;
       }
-
+      newGame.currentFruits = new LimitedArray([]);
       newGame.canClick = true;
       return newGame;
     }
@@ -146,7 +149,7 @@ function gameReducer(game: GameState, action: GameAction) {
       return { ...game, canClick: false, message: "Game over!", timeUp: true };
     }
     case ActionTypes.RESET: {
-      return getInitialGameState(action.difficulty);
+      return getInitialGameState({ difficulty: action.difficulty, shuffle });
     }
     default:
       return game;

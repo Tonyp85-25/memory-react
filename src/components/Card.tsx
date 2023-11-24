@@ -1,8 +1,8 @@
-import { Dispatch, useCallback, useContext } from "react";
+import { useCallback, useContext } from "react";
 
 import { GameDispatchContext, GameStateContext } from "../contexts/GameContext";
-import { checkCards } from "../actions";
-import { DispatchFn, Fruit, GameAction, GameState } from "../types";
+import { ActionTypes, checkCards } from "../actions";
+import { Fruit, GameDispatch, GameState } from "../types";
 
 interface CardProps {
   fruit: Fruit;
@@ -15,16 +15,18 @@ const Card = (props: CardProps) => {
   const cardStyle = {
     backgroundPosition: fruit.position,
   };
-  const dispatch = useContext(GameDispatchContext) as Dispatch<
-    GameAction | DispatchFn
-  >;
-  const { cards, canClick, currentFruits } = useContext(
-    GameStateContext,
-  ) as GameState;
+  const dispatch = useContext(GameDispatchContext) as GameDispatch;
+  const { cards, canClick, currentFruits } =
+    useContext<GameState>(GameStateContext);
+
   const handleClick = useCallback(() => {
     if (!cards[index].isClickable || !canClick) {
       return;
-    } else {
+    }
+
+    if (currentFruits.length === 0) {
+      dispatch({ type: ActionTypes.TURN_UP, index });
+    } else if (currentFruits.length === 1) {
       dispatch(checkCards(currentFruits, index));
     }
   }, [cards, canClick, currentFruits, dispatch, index]);

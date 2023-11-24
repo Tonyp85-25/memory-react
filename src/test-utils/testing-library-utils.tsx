@@ -1,20 +1,30 @@
 import { render, RenderOptions } from "@testing-library/react";
 import { ReactElement } from "react";
 import { GameProvider } from "../contexts/GameContext";
-import { Difficulty } from "../types";
+import { CardType, Difficulty } from "../types";
 import { SnackbarProvider } from "notistack";
 
-const EasyGameProvider = ({ children }: { children: ReactElement }) => (
-  <SnackbarProvider>
-    <GameProvider difficulty={"easy"}>{children}</GameProvider>
-  </SnackbarProvider>
-);
+const testFn = (cards: CardType[]) => cards;
 
-const HardGameProvider = ({ children }: { children: ReactElement }) => (
-  <SnackbarProvider>
-    <GameProvider difficulty={"hard"}>{children}</GameProvider>
-  </SnackbarProvider>
-);
+const EasyGameProvider = ({ children }: { children: ReactElement }) => {
+  return (
+    <SnackbarProvider>
+      <GameProvider options={{ difficulty: "easy", shuffle: testFn }}>
+        {children}
+      </GameProvider>
+    </SnackbarProvider>
+  );
+};
+
+const HardGameProvider = ({ children }: { children: ReactElement }) => {
+  return (
+    <SnackbarProvider>
+      <GameProvider options={{ difficulty: "hard", shuffle: testFn }}>
+        {children}
+      </GameProvider>
+    </SnackbarProvider>
+  );
+};
 const renderWithContext = (
   ui: ReactElement,
   difficulty: Difficulty,

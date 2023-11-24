@@ -53,6 +53,12 @@ const Difficulties = ["easy", "hard"] as const;
 export type Difficulty = (typeof Difficulties)[number];
 export type FruitName = (typeof fruits)[number];
 export type DispatchFn = (dispatch: Dispatch<GameAction>) => void;
+export type GameDispatch = Dispatch<GameAction | DispatchFn>;
+type ShuffleFn = (cards: CardType[]) => CardType[];
+export interface GameOptions {
+  difficulty: Difficulty;
+  shuffle: ShuffleFn;
+}
 
 export class LimitedArray<T> {
   constructor(value: T[]) {
@@ -64,7 +70,9 @@ export class LimitedArray<T> {
     return this.data.length;
   }
   isFull() {
-    return this.data.length >= 2;
+    console.log(this.data.length);
+
+    return this.data.length === 2;
   }
 
   get head() {

@@ -17,6 +17,7 @@ export enum ActionTypes {
   SUCCESS = "SUCCESS",
   RESET = "RESET",
 }
+export const VALIDATION_TIME = 1000;
 
 export function withThunk(dispatch: Dispatch<GameAction>) {
   return (actionOrThunk: GameAction | DispatchFn) =>
@@ -31,11 +32,13 @@ export function checkCards(
 ): DispatchFn {
   return function (dispatch: Dispatch<GameAction>) {
     dispatch({ type: ActionTypes.TURN_UP, index });
+    console.log(currentFruits.isFull());
+
     if (currentFruits.isFull()) {
       dispatch({ type: ActionTypes.BEFORE_CHECK });
       setTimeout(() => {
         dispatch({ type: ActionTypes.CHECK_CARDS });
-      }, 1000);
+      }, VALIDATION_TIME);
     }
   };
 }

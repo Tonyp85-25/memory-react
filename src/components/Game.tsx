@@ -4,6 +4,7 @@ import { Difficulty, GameAction } from "../types";
 import { GameDispatchContext, GameProvider } from "../contexts/GameContext";
 import { Dispatch, useContext } from "react";
 import { ActionTypes } from "../actions";
+import { shuffle } from "../helpers";
 const EasyBoard = () => {
   const dispatch = useContext(GameDispatchContext) as Dispatch<GameAction>;
   return (
@@ -50,7 +51,7 @@ const Game = ({ difficulty }: { difficulty: Difficulty }) => {
   const BoardComponent = components[difficulty];
 
   return (
-    <GameProvider difficulty={difficulty}>
+    <GameProvider options={{ difficulty, shuffle }}>
       <BoardComponent />
     </GameProvider>
   );
