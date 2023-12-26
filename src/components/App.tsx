@@ -1,7 +1,7 @@
-import Game from "./Game";
+import Game from "../pages/Game";
 
 import Navigation from "./Navigation";
-import Home from "./Home";
+import Home from "../pages/Home";
 
 import { Route, Switch } from "react-router-dom";
 
@@ -14,11 +14,8 @@ function App() {
           <Route path="/" exact={true}>
             <Home />
           </Route>
-          <Route path="/easy">
-            <Game difficulty="easy" />
-          </Route>
-          <Route path="/hard">
-            <Game difficulty="hard" />
+          <Route path="/:difficulty">
+            <Game />
           </Route>
         </Switch>
       </main>

@@ -1,12 +1,14 @@
-import Board from "./Board";
-import Timer from "./Timer";
+import Board from "../components/Board";
+import Timer from "../components/Timer";
 import { Difficulty, GameAction } from "../types";
 import { GameDispatchContext, GameProvider } from "../contexts/GameContext";
 import { Dispatch, useContext } from "react";
 import { ActionTypes } from "../actions";
 import { shuffle } from "../helpers";
+import { useParams } from "react-router-dom";
 const EasyBoard = () => {
   const dispatch = useContext(GameDispatchContext) as Dispatch<GameAction>;
+
   return (
     <div className="container">
       <h3>Difficulty: easy</h3>
@@ -47,7 +49,8 @@ const components = {
   hard: HardBoard,
 };
 
-const Game = ({ difficulty }: { difficulty: Difficulty }) => {
+const Game = () => {
+  const { difficulty } = useParams() as { difficulty: Difficulty };
   const BoardComponent = components[difficulty];
 
   return (
