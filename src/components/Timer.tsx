@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import styles from "./timer.module.css";
 import { type Difficulty } from "../types";
 import { GameStateContext } from "../contexts/GameContext";
@@ -11,21 +11,27 @@ export const GAME_DURATION = {
 const Timer = ({ difficulty }: { difficulty: Difficulty }) => {
   const { timeUp } = useContext(GameStateContext);
 
-  const [count, setCount] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const countRef = useRef<HTMLProgressElement | null>(null);
 
   useEffect(() => {
-    if (!timeUp && count < 100) {
+    if (!timeUp) {
       intervalRef.current = setInterval(() => {
-        setCount(count + 1);
+        if (countRef.current) {
+          countRef.current.value = countRef.current.value + 1;
+        }
       }, GAME_DURATION[difficulty] / 100);
-    } else if (timeUp && count >= 99) {
-      setCount(0);
     } else {
       enqueueSnackbar("Time's up!", {
         variant: "error",
         anchorOrigin: { vertical: "bottom", horizontal: "center" },
       });
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+      if (countRef.current) {
+        countRef.current.value = 0;
+      }
     }
 
     return function () {
@@ -33,11 +39,11 @@ const Timer = ({ difficulty }: { difficulty: Difficulty }) => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [difficulty, count, timeUp]);
+  }, [difficulty, timeUp]);
 
   return (
     <div className={styles.timer}>
-      <progress value={count + 1} max={99} />
+      <progress ref={countRef} max={100} />
     </div>
   );
 };

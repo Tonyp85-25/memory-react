@@ -53,7 +53,9 @@ describe("test validation rules", () => {
     render(<Board difficulty={"easy"} />, "easy");
     const cards = await screen.findAllByRole("button");
     fireEvent.click(cards[0]);
-    fireEvent.click(cards[1]);
+    act(() => {
+      fireEvent.click(cards[1]);
+    });
     act(() => jest.advanceTimersByTime(VALIDATION_TIME));
     expect(cards[0]).toHaveClass("card");
     expect(cards[1]).toHaveClass("card");
@@ -64,7 +66,9 @@ describe("test validation rules", () => {
     const cards = await screen.findAllByRole("button");
     const sameFruitCardIndex = NUMBER_OF_CARDS["easy"] / 2;
     fireEvent.click(cards[0]);
-    fireEvent.click(cards[sameFruitCardIndex]);
+    act(() => {
+      fireEvent.click(cards[sameFruitCardIndex]);
+    });
     act(() => jest.advanceTimersByTime(VALIDATION_TIME));
     expect(cards[0]).toHaveClass("card image");
     expect(cards[sameFruitCardIndex]).toHaveClass("card image");
@@ -75,7 +79,9 @@ describe("test validation rules", () => {
     const cards = await screen.findAllByRole("button");
 
     fireEvent.click(cards[0]);
-    fireEvent.click(cards[1]);
+    act(() => {
+      fireEvent.click(cards[1]);
+    });
     fireEvent.click(cards[2]);
     expect(cards[0]).toHaveClass("card image");
     expect(cards[1]).toHaveClass("card image");
