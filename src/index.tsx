@@ -7,7 +7,7 @@ import { SnackbarProvider } from "notistack";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter forceRefresh={true}>
       <SnackbarProvider>
         <App />
       </SnackbarProvider>

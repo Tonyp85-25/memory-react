@@ -9,7 +9,6 @@ export enum ActionTypes {
   TURN_UP = "TURN_UP",
   BEFORE_CHECK = "BEFORE_CHECK",
   SUCCESS = "SUCCESS",
-  RESET = "RESET",
 }
 export const VALIDATION_TIME = 1000;
 

@@ -1,21 +1,16 @@
 import Board from "../components/Board";
 import Timer from "../components/Timer";
-import { Difficulty, GameAction } from "../types";
-import { GameDispatchContext, GameProvider } from "../contexts/GameContext";
-import { Dispatch, useContext } from "react";
-import { ActionTypes } from "../actions";
+import { Difficulty } from "../types";
+import { GameProvider } from "../contexts/GameContext";
 import { shuffle } from "../helpers";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 const EasyBoard = () => {
-  const dispatch = useContext(GameDispatchContext) as Dispatch<GameAction>;
-
+  const history = useHistory();
   return (
     <div className="container">
       <h3>Difficulty: easy</h3>
       <button
-        onClick={() =>
-          dispatch({ type: ActionTypes.RESET, difficulty: "easy" })
-        }
+        onClick={() => () => history.push("/easy")}
         className="reset-button"
       >
         Reset
@@ -27,16 +22,11 @@ const EasyBoard = () => {
   );
 };
 const HardBoard = () => {
-  const dispatch = useContext(GameDispatchContext) as Dispatch<GameAction>;
+  const history = useHistory();
   return (
     <div>
       <h3>Difficulty: hard</h3>
-      <button
-        onClick={() =>
-          dispatch({ type: ActionTypes.RESET, difficulty: "hard" })
-        }
-        className="reset-button"
-      >
+      <button onClick={() => history.push("/hard")} className="reset-button">
         Reset
       </button>
       <Board difficulty={"hard"} />

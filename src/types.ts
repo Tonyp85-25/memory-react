@@ -22,11 +22,10 @@ export interface GameState {
   score: number;
 }
 export type SimpleAction = {
-  type: Exclude<ActionTypes, ActionTypes.TURN_UP | ActionTypes.RESET>;
+  type: Exclude<ActionTypes, ActionTypes.TURN_UP>;
 };
 export type TurnUpAction = { type: ActionTypes.TURN_UP; index: number };
-export type ResetAction = { type: ActionTypes.RESET; difficulty: Difficulty };
-export type GameAction = TurnUpAction | SimpleAction | ResetAction;
+export type GameAction = TurnUpAction | SimpleAction;
 
 export const fruits = [
   "apple",
@@ -54,7 +53,7 @@ export type Difficulty = (typeof Difficulties)[number];
 export type FruitName = (typeof fruits)[number];
 export type DispatchFn = (dispatch: Dispatch<GameAction>) => void;
 export type GameDispatch = Dispatch<GameAction | DispatchFn>;
-type ShuffleFn = (cards: CardType[]) => CardType[];
+type ShuffleFn = (cards: unknown[]) => unknown[];
 export interface GameOptions {
   difficulty: Difficulty;
   shuffle: ShuffleFn;

@@ -1,10 +1,10 @@
 import { render, RenderOptions } from "@testing-library/react";
 import { ReactElement } from "react";
 import { GameProvider } from "../contexts/GameContext";
-import { CardType, Difficulty } from "../types";
+import { Difficulty } from "../types";
 import { SnackbarProvider } from "notistack";
 
-const testFn = (cards: CardType[]) => cards;
+const testFn = (cards: unknown[]) => cards;
 
 const EasyGameProvider = ({ children }: { children: ReactElement }) => {
   return (

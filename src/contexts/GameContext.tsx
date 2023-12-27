@@ -8,12 +8,7 @@ import {
 } from "react";
 import { ActionTypes, withThunk } from "../actions";
 import { GameOptions } from "../types";
-import {
-  areCardsEquals,
-  areFruitsDifferent,
-  getPosition,
-  shuffle,
-} from "../helpers";
+import { areCardsEquals, areFruitsDifferent, getPosition } from "../helpers";
 import { CardType, GameAction, GameState, ArrayOfTwo, fruits } from "../types";
 import { GAME_DURATION } from "../components/Timer";
 import { enqueueSnackbar } from "notistack";
@@ -141,9 +136,6 @@ function gameReducer(game: GameState, action: GameAction) {
     }
     case ActionTypes.TIME_UP: {
       return { ...game, canClick: false, message: "Game over!", timeUp: true };
-    }
-    case ActionTypes.RESET: {
-      return getInitialGameState({ difficulty: action.difficulty, shuffle });
     }
     default:
       return game;
