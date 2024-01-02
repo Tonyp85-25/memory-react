@@ -8,13 +8,17 @@ const EasyBoard = () => {
   const history = useHistory();
   return (
     <div className="container">
-      <h3>Difficulty: easy</h3>
-      <button
-        onClick={() => () => history.push("/easy")}
-        className="reset-button"
-      >
-        Reset
-      </button>
+      <div className="board-header">
+        <h3>Difficulty: easy</h3>
+
+        <button
+          onClick={() => history.push("/easy")}
+          className="secondary btn-sm
+        "
+        >
+          Reset
+        </button>
+      </div>
 
       <Board difficulty={"easy"} />
       <Timer difficulty={"easy"} />
@@ -24,11 +28,17 @@ const EasyBoard = () => {
 const HardBoard = () => {
   const history = useHistory();
   return (
-    <div>
-      <h3>Difficulty: hard</h3>
-      <button onClick={() => history.push("/hard")} className="reset-button">
-        Reset
-      </button>
+    <div className="container">
+      <div className="board-header">
+        <h3>Difficulty: hard</h3>
+        <button
+          onClick={() => history.push("/hard")}
+          className="secondary btn-sm"
+        >
+          Reset
+        </button>
+      </div>
+
       <Board difficulty={"hard"} />
       <Timer difficulty={"hard"} />
     </div>
