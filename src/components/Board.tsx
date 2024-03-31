@@ -1,8 +1,8 @@
 import { useContext } from "react";
+import { GameStateContext } from "../contexts/GameContext";
+import type { CardType, Difficulty, GameState } from "../types";
 import Card from "./Card";
 import styles from "./board.module.css";
-import { GameStateContext } from "../contexts/GameContext";
-import type { GameState, CardType, Difficulty } from "../types";
 
 const GAME_WIDTH = {
 	easy: "780px",

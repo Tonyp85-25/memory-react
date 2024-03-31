@@ -58,5 +58,3 @@ export interface GameOptions {
 	difficulty: Difficulty;
 	shuffle: ShuffleFn;
 }
-
-

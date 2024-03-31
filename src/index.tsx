@@ -1,9 +1,9 @@
+import { SnackbarProvider } from "notistack";
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.scss";
-import App from "./components/App";
 import { BrowserRouter } from "react-router-dom";
-import { SnackbarProvider } from "notistack";
+import App from "./components/App";
+import "./index.scss";
 
 ReactDOM.render(
 	<React.StrictMode>
