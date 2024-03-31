@@ -1,7 +1,7 @@
 import Game from "../pages/Game";
 
-import Navigation from "./Navigation";
 import Home from "../pages/Home";
+import Navigation from "./Navigation";
 
 import { Route, Switch } from "react-router-dom";
 

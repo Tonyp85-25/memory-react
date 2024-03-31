@@ -1,3 +1,4 @@
+import { enqueueSnackbar } from "notistack";
 import {
 	type Dispatch,
 	type ReactElement,
@@ -5,13 +6,17 @@ import {
 	useEffect,
 	useRef,
 } from "react";
-import { ActionTypes, withThunk } from "../actions";
-import type { GameOptions } from "../types";
-import { areFruitsDifferent, getPosition } from "../helpers";
-import { type CardType, type GameAction, type GameState, fruits } from "../types";
-import { GAME_DURATION } from "../components/Timer";
-import { enqueueSnackbar } from "notistack";
 import { useImmerReducer } from "use-immer";
+import { ActionTypes, withThunk } from "../actions";
+import { GAME_DURATION } from "../components/Timer";
+import { areFruitsDifferent, getPosition } from "../helpers";
+import type { GameOptions } from "../types";
+import {
+	type CardType,
+	type GameAction,
+	type GameState,
+	fruits,
+} from "../types";
 
 export const NUMBER_OF_CARDS = {
 	easy: 28,

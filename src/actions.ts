@@ -1,6 +1,6 @@
 import type { Dispatch } from "react";
-import type { Difficulty, DispatchFn, GameAction } from "./types";
 import { GAME_DURATION } from "./components/Timer";
+import type { Difficulty, DispatchFn, GameAction } from "./types";
 
 export enum ActionTypes {
 	CHECK_CARDS = "CHECK_CARDS",
