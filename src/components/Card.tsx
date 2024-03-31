@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 
 import { GameDispatchContext, GameStateContext } from "../contexts/GameContext";
 import { ActionTypes, checkCards } from "../actions";
-import { Fruit, GameDispatch, GameState } from "../types";
+import type { Fruit, GameDispatch, GameState } from "../types";
 
 interface CardProps {
 	fruit: Fruit;
@@ -31,12 +31,13 @@ const Card = (props: CardProps) => {
 	}, [canClick, cards, currentFruits, dispatch, index]);
 
 	return (
-		<div
+
+    <div
 			className={className}
 			onClick={handleClick}
 			style={cardStyle}
 			role={"button"}
-		></div>
+		/>
 	);
 };
 
