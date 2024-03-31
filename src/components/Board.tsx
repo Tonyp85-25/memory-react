@@ -5,24 +5,24 @@ import { GameStateContext } from "../contexts/GameContext";
 import { GameState, type CardType, type Difficulty } from "../types";
 
 const GAME_WIDTH = {
-  easy: "780px",
-  hard: "1000px",
+	easy: "780px",
+	hard: "1000px",
 };
 const Board = ({ difficulty }: { difficulty: Difficulty }) => {
-  const { cards } = useContext<GameState>(GameStateContext);
+	const { cards } = useContext<GameState>(GameStateContext);
 
-  return (
-    <div className={styles.board} style={{ width: GAME_WIDTH[difficulty] }}>
-      {cards.map((card: CardType, index: number) => (
-        <Card
-          fruit={card.fruit}
-          className={card.className}
-          key={index}
-          index={index}
-        />
-      ))}
-    </div>
-  );
+	return (
+		<div className={styles.board} style={{ width: GAME_WIDTH[difficulty] }}>
+			{cards.map((card: CardType, index: number) => (
+				<Card
+					fruit={card.fruit}
+					className={card.className}
+					key={index}
+					index={index}
+				/>
+			))}
+		</div>
+	);
 };
 
 export default Board;
