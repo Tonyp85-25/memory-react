@@ -1,5 +1,5 @@
-import { Dispatch } from "react";
-import { ActionTypes } from "./actions";
+import type { Dispatch } from "react";
+import type { ActionTypes } from "./actions";
 
 export interface CardType {
 	fruit: Fruit;
@@ -59,30 +59,4 @@ export interface GameOptions {
 	shuffle: ShuffleFn;
 }
 
-export class ArrayOfTwo<T> {
-	constructor(value: T[]) {
-		this.data = value;
-	}
 
-	data: T[];
-	length() {
-		return this.data.length;
-	}
-	isFull() {
-		return this.data.length === 2;
-	}
-
-	head() {
-		return this.data[0];
-	}
-
-	tail() {
-		return this.data[1];
-	}
-
-	push(value: T) {
-		if (!this.isFull()) {
-			this.data.push(value);
-		}
-	}
-}

@@ -1,4 +1,4 @@
-import { CurrentFruit, FruitName, fruits } from "./types";
+import type { CurrentFruit, FruitName, fruits } from "./types";
 
 /**
  * @source https://gist.github.com/astoilkov/013c513e33fe95fa8846348038d8fe42?permalink_comment_id=3377800#gistcomment-3377800
@@ -7,7 +7,7 @@ import { CurrentFruit, FruitName, fruits } from "./types";
 const SPRITE_SPACE = 100; // there is 100px between each sprite
 export const getPosition = (pArray: typeof fruits, value: FruitName) => {
 	const index = pArray.indexOf(value);
-	return "0px " + -index * SPRITE_SPACE + "px";
+	return `0px ${-index * SPRITE_SPACE}px`;
 };
 
 export const shuffle = (a: Array<unknown>): Array<unknown> => {

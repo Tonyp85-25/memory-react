@@ -1,5 +1,5 @@
-import { Dispatch } from "react";
-import { Difficulty, DispatchFn, GameAction } from "./types";
+import type { Dispatch } from "react";
+import type { Difficulty, DispatchFn, GameAction } from "./types";
 import { GAME_DURATION } from "./components/Timer";
 
 export enum ActionTypes {
@@ -20,7 +20,7 @@ export function withThunk(dispatch: Dispatch<GameAction>) {
 }
 
 export function checkCards(index: number): DispatchFn {
-	return function (dispatch: Dispatch<GameAction>) {
+	return (dispatch: Dispatch<GameAction>) => {
 		dispatch({ type: ActionTypes.TURN_UP, index });
 		dispatch({ type: ActionTypes.BEFORE_CHECK });
 		setTimeout(() => {
@@ -30,7 +30,7 @@ export function checkCards(index: number): DispatchFn {
 }
 
 export function checkTime(difficulty: Difficulty) {
-	return function (dispatch: Dispatch<GameAction>) {
+	return (dispatch: Dispatch<GameAction>) => {
 		setTimeout(() => {
 			dispatch({ type: ActionTypes.TIME_UP });
 		}, GAME_DURATION[difficulty]);

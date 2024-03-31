@@ -2,7 +2,7 @@ import { useContext } from "react";
 import Card from "./Card";
 import styles from "./board.module.css";
 import { GameStateContext } from "../contexts/GameContext";
-import { GameState, type CardType, type Difficulty } from "../types";
+import type { GameState, CardType, Difficulty } from "../types";
 
 const GAME_WIDTH = {
 	easy: "780px",
@@ -17,7 +17,7 @@ const Board = ({ difficulty }: { difficulty: Difficulty }) => {
 				<Card
 					fruit={card.fruit}
 					className={card.className}
-					key={index}
+					key={`card-${card.fruit.name}-${index}`}
 					index={index}
 				/>
 			))}

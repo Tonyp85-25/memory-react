@@ -44,9 +44,9 @@ jobs:
 
       - name: Test
         run: pnpm run test_ci
-      - name: TSC
-        run: pnpm run tsc
-      - name: Lint
-        run: pnpm run lint
-      - name: Format
-        run: pnpm run prettier_ci
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
+      - name: Run Biome
+        run: biome ci .

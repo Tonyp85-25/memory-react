@@ -18,9 +18,8 @@
 		"test": "jest --watch",
 		"test_ci": "jest",
 		"tsc": "tsc --noEmit",
-		"lint": "eslint src",
-		"prettier": "prettier . --write",
-		"prettier_ci": "prettier . --list-different"
+		"lint": "biome lint ./src",
+		"format": "biome format ./src --write"
 	},
 	"browserslist": {
 		"production": [">0.2%", "not dead", "not op_mini all"],

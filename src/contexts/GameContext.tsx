@@ -1,14 +1,14 @@
 import {
-	Dispatch,
-	ReactElement,
+	type Dispatch,
+	type ReactElement,
 	createContext,
 	useEffect,
 	useRef,
 } from "react";
 import { ActionTypes, withThunk } from "../actions";
-import { GameOptions } from "../types";
+import type { GameOptions } from "../types";
 import { areFruitsDifferent, getPosition } from "../helpers";
-import { CardType, GameAction, GameState, fruits } from "../types";
+import { type CardType, type GameAction, type GameState, fruits } from "../types";
 import { GAME_DURATION } from "../components/Timer";
 import { enqueueSnackbar } from "notistack";
 import { useImmerReducer } from "use-immer";
@@ -34,7 +34,7 @@ function getInitialGameState(options: GameOptions): GameState {
 		for (let i = 0; i < NUMBER_OF_CARDS[difficulty] / 2; i++) {
 			cards.push({
 				fruit: { name: fruits[i], position: getPosition(fruits, fruits[i]) },
-				className: cardStyles["back"],
+				className: cardStyles.back,
 				isClickable: true,
 			});
 		}
@@ -77,7 +77,7 @@ export function GameProvider({
 			});
 			dispatch({ type: ActionTypes.SUCCESS });
 		}
-		return function () {
+		return () => {
 			if (timeoutRef.current) {
 				clearTimeout(timeoutRef.current);
 			}
@@ -101,7 +101,7 @@ function gameReducer(game: GameState, action: GameAction) {
 		case ActionTypes.TURN_UP: {
 			console.log(action.index);
 
-			game.cards[action.index].className = cardStyles["up"];
+			game.cards[action.index].className = cardStyles.up;
 			game.cards[action.index].isClickable = false;
 			game.currentFruits.push({
 				fruit: game.cards[action.index].fruit.name,
@@ -118,9 +118,9 @@ function gameReducer(game: GameState, action: GameAction) {
 		case ActionTypes.CHECK_CARDS: {
 			const [head, tail] = game.currentFruits;
 			if (areFruitsDifferent(head, tail)) {
-				game.cards[head.index].className = cardStyles["back"];
+				game.cards[head.index].className = cardStyles.back;
 				game.cards[head.index].isClickable = true;
-				game.cards[tail.index].className = cardStyles["back"];
+				game.cards[tail.index].className = cardStyles.back;
 				game.cards[tail.index].isClickable = true;
 			} else {
 				game.score++;
