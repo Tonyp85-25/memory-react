@@ -6,12 +6,12 @@ import { BrowserRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter forceRefresh={true}>
-      <SnackbarProvider>
-        <App />
-      </SnackbarProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root"),
+	<React.StrictMode>
+		<BrowserRouter forceRefresh={true}>
+			<SnackbarProvider>
+				<App />
+			</SnackbarProvider>
+		</BrowserRouter>
+	</React.StrictMode>,
+	document.getElementById("root"),
 );

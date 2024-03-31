@@ -6,28 +6,28 @@ import { CurrentFruit, FruitName, fruits } from "./types";
 
 const SPRITE_SPACE = 100; // there is 100px between each sprite
 export const getPosition = (pArray: typeof fruits, value: FruitName) => {
-  const index = pArray.indexOf(value);
-  return "0px " + -index * SPRITE_SPACE + "px";
+	const index = pArray.indexOf(value);
+	return "0px " + -index * SPRITE_SPACE + "px";
 };
 
 export const shuffle = (a: Array<unknown>): Array<unknown> => {
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+	for (let i = a.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[a[i], a[j]] = [a[j], a[i]];
+	}
+	return a;
 };
 
 export function areFruitsDifferent(
-  fruit1: CurrentFruit,
-  fruit2: CurrentFruit,
+	fruit1: CurrentFruit,
+	fruit2: CurrentFruit,
 ): boolean {
-  return fruit1.fruit !== fruit2.fruit;
+	return fruit1.fruit !== fruit2.fruit;
 }
 
 export function areCardsEquals(
-  cardIndex1: number,
-  cardIndex2: number,
+	cardIndex1: number,
+	cardIndex2: number,
 ): boolean {
-  return cardIndex1 === cardIndex2;
+	return cardIndex1 === cardIndex2;
 }
