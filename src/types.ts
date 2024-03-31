@@ -17,7 +17,7 @@ export interface Fruit {
 export interface GameState {
   cards: CardType[];
   timeUp: boolean;
-  currentFruits: ArrayOfTwo<CurrentFruit>;
+  currentFruits: Array<CurrentFruit>;
   canClick: boolean;
   score: number;
 }
@@ -65,18 +65,18 @@ export class ArrayOfTwo<T> {
   }
 
   data: T[];
-  get length() {
+  length() {
     return this.data.length;
   }
   isFull() {
     return this.data.length === 2;
   }
 
-  get head() {
+  head() {
     return this.data[0];
   }
 
-  get tail() {
+  tail() {
     return this.data[1];
   }
 

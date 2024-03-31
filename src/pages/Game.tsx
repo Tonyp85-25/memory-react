@@ -6,6 +6,8 @@ import { shuffle } from "../helpers";
 import { useHistory, useParams } from "react-router-dom";
 const EasyBoard = () => {
   const history = useHistory();
+  console.log("easyboard");
+
   return (
     <div className="container">
       <div className="board-header">
@@ -27,6 +29,8 @@ const EasyBoard = () => {
 };
 const HardBoard = () => {
   const history = useHistory();
+  console.log("hardboard");
+
   return (
     <div className="container">
       <div className="board-header">

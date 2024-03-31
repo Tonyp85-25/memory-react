@@ -23,13 +23,12 @@ const Card = (props: CardProps) => {
     if (!cards[index].isClickable || !canClick) {
       return;
     }
-
     if (currentFruits.length === 0) {
       dispatch({ type: ActionTypes.TURN_UP, index });
     } else {
       dispatch(checkCards(index));
     }
-  }, [cards, canClick, currentFruits, dispatch, index]);
+  }, [canClick, cards, currentFruits, dispatch, index]);
 
   return (
     <div

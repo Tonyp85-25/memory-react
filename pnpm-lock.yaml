@@ -25,6 +25,7 @@ specifiers:
   eslint-plugin-react-hooks: ^4.6.0
   eslint-plugin-react-refresh: ^0.4.3
   identity-obj-proxy: ^3.0.0
+  immer: ^10.0.4
   jest: ^29.7.0
   jest-environment-jsdom: ^29.7.0
   jest-svg-transformer: ^1.0.0
@@ -36,15 +37,18 @@ specifiers:
   sass: ^1.69.6
   ts-jest: ^29.1.1
   typescript: ^5.2.2
+  use-immer: ^0.9.0
   vite: 3.2.7
   vite-plugin-svgr: 0.3.0
 
 dependencies:
   '@picocss/pico': 1.5.11
+  immer: 10.0.4
   notistack: 3.0.1_sfoxds7t5ydpegc3knd667wn6m
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-router-dom: 5.3.4_react@17.0.2
+  use-immer: 0.9.0_immer@10.0.4+react@17.0.2
 
 devDependencies:
   '@babel/core': 7.4.0
@@ -4144,6 +4148,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immer/10.0.4:
+    resolution: {integrity: sha512-cuBuGK40P/sk5IzWa9QPUaAdvPHjkk1c+xYsd9oZw+YQQEV+10G0P5uMpGctZZKnyQ+ibRO08bD25nWLmYi2pw==}
+    dev: false
+
   /immutable/4.3.4:
     resolution: {integrity: sha512-fsXeu4J4i6WNWSikpI88v/PcVflZz+6kMhUfIwc5SY+poQRPnaf5V7qds6SUyUN3cVxEzuCab7QIoLOQ+DQ1wA==}
     dev: true
@@ -6272,6 +6280,16 @@ packages:
       querystringify: 2.2.0
       requires-port: 1.0.0
     dev: true
+
+  /use-immer/0.9.0_immer@10.0.4+react@17.0.2:
+    resolution: {integrity: sha512-/L+enLi0nvuZ6j4WlyK0US9/ECUtV5v9RUbtxnn5+WbtaXYUaOBoKHDNL9I5AETdurQ4rIFIj/s+Z5X80ATyKw==}
+    peerDependencies:
+      immer: '>=2.0.0'
+      react: ^16.8.0 || ^17.0.1 || ^18.0.0
+    dependencies:
+      immer: 10.0.4
+      react: 17.0.2
+    dev: false
 
   /v8-to-istanbul/9.1.3:
     resolution: {integrity: sha512-9lDD+EVI2fjFsMWXc6dy5JJzBsVTcQ2fVkfBvncZ6xJWG9wtBhOldG+mHkSL0+V1K/xgZz0JDO5UT5hFwHUghg==}

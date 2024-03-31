@@ -3,15 +3,15 @@ import {
   ReactElement,
   createContext,
   useEffect,
-  useReducer,
   useRef,
 } from "react";
 import { ActionTypes, withThunk } from "../actions";
 import { GameOptions } from "../types";
-import { areCardsEquals, areFruitsDifferent, getPosition } from "../helpers";
-import { CardType, GameAction, GameState, ArrayOfTwo, fruits } from "../types";
+import { areFruitsDifferent, getPosition } from "../helpers";
+import { CardType, GameAction, GameState, fruits } from "../types";
 import { GAME_DURATION } from "../components/Timer";
 import { enqueueSnackbar } from "notistack";
+import { useImmerReducer } from "use-immer";
 
 export const NUMBER_OF_CARDS = {
   easy: 28,
@@ -45,7 +45,7 @@ function getInitialGameState(options: GameOptions): GameState {
   return {
     cards,
     timeUp: false,
-    currentFruits: new ArrayOfTwo([]),
+    currentFruits: [],
     canClick: true,
     score: 0,
   };
@@ -58,7 +58,7 @@ export function GameProvider({
   children: ReactElement;
   options: GameOptions;
 }) {
-  const [game, dispatch] = useReducer(
+  const [game, dispatch] = useImmerReducer(
     gameReducer,
     options,
     getInitialGameState,
@@ -82,7 +82,8 @@ export function GameProvider({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [difficulty, game.score]);
+  }, [difficulty, dispatch, game.score]);
+
   if (game === null) {
     return null;
   }
@@ -98,41 +99,36 @@ export function GameProvider({
 function gameReducer(game: GameState, action: GameAction) {
   switch (action.type) {
     case ActionTypes.TURN_UP: {
-      if (
-        game.currentFruits.head &&
-        areCardsEquals(game.currentFruits.head.index, action.index)
-      ) {
-        return game;
-      }
-      const newGame = { ...game };
-      newGame.cards[action.index].className = cardStyles["up"];
-      newGame.cards[action.index].isClickable = false;
-      newGame.currentFruits.push({
-        fruit: newGame.cards[action.index].fruit.name,
+      console.log(action.index);
+
+      game.cards[action.index].className = cardStyles["up"];
+      game.cards[action.index].isClickable = false;
+      game.currentFruits.push({
+        fruit: game.cards[action.index].fruit.name,
         index: action.index,
       });
-      return newGame;
+
+      return game;
     }
     case ActionTypes.SUCCESS:
     case ActionTypes.BEFORE_CHECK: {
-      return { ...game, canClick: false };
+      game.canClick = false;
+      return game;
     }
     case ActionTypes.CHECK_CARDS: {
-      const newGame = { ...game };
-      const { cards, currentFruits } = newGame;
-      if (areFruitsDifferent(currentFruits.head, currentFruits.tail)) {
-        const { head, tail } = currentFruits;
-        cards[head.index].className = cardStyles["back"];
-        cards[head.index].isClickable = true;
-        cards[tail.index].className = cardStyles["back"];
-        cards[tail.index].isClickable = true;
+      const [head, tail] = game.currentFruits;
+      if (areFruitsDifferent(head, tail)) {
+        game.cards[head.index].className = cardStyles["back"];
+        game.cards[head.index].isClickable = true;
+        game.cards[tail.index].className = cardStyles["back"];
+        game.cards[tail.index].isClickable = true;
       } else {
-        newGame.score++;
+        game.score++;
       }
-      newGame.cards = cards;
-      newGame.currentFruits = new ArrayOfTwo([]);
-      newGame.canClick = true;
-      return newGame;
+
+      game.currentFruits = [];
+      game.canClick = true;
+      return game;
     }
     case ActionTypes.TIME_UP: {
       return { ...game, canClick: false, message: "Game over!", timeUp: true };
