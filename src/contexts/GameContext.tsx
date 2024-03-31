@@ -104,8 +104,6 @@ export function GameProvider({
 function gameReducer(game: GameState, action: GameAction) {
 	switch (action.type) {
 		case ActionTypes.TURN_UP: {
-			console.log(action.index);
-
 			game.cards[action.index].className = cardStyles.up;
 			game.cards[action.index].isClickable = false;
 			game.currentFruits.push({

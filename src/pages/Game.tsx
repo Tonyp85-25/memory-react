@@ -29,7 +29,6 @@ const EasyBoard = () => {
 };
 const HardBoard = () => {
 	const history = useHistory();
-	console.log("hardboard");
 
 	return (
 		<div className="container">
