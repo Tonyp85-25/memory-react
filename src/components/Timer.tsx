@@ -1,6 +1,7 @@
-import { enqueueSnackbar } from "notistack";
-import { useContext, useEffect, useRef } from "react";
-import { GameStateContext } from "../contexts/GameContext";
+import { useSnackbar } from "notistack";
+import { useContext, useEffect, useRef, useState } from "react";
+import { ActionTypes } from "../actions";
+import { GameDispatchContext } from "../contexts/GameContext";
 import type { Difficulty } from "../types";
 import styles from "./timer.module.css";
 
@@ -9,41 +10,39 @@ export const GAME_DURATION = {
 	hard: 90000,
 };
 const Timer = ({ difficulty }: { difficulty: Difficulty }) => {
-	const { timeUp } = useContext(GameStateContext);
+	const dispatch = useContext(GameDispatchContext);
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
+	const [timerValue, setTimerValue] = useState<number>(0);
 	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-	const countRef = useRef<HTMLProgressElement | null>(null);
+	const snackbarRef = useRef<ReturnType<typeof enqueueSnackbar> | null>(null);
 
 	useEffect(() => {
-		if (!timeUp) {
+		if (timerValue < 100) {
 			intervalRef.current = setInterval(() => {
-				if (countRef.current) {
-					countRef.current.value = countRef.current.value + 1;
-				}
+				setTimerValue((prev) => prev + 1);
 			}, GAME_DURATION[difficulty] / 100);
 		} else {
-			enqueueSnackbar("Time's up!", {
+			snackbarRef.current = enqueueSnackbar("Time's up!", {
 				variant: "error",
 				anchorOrigin: { vertical: "bottom", horizontal: "center" },
 			});
-			if (intervalRef.current) {
-				clearInterval(intervalRef.current);
-			}
-			if (countRef.current) {
-				countRef.current.value = 0;
-			}
+			dispatch({ type: ActionTypes.TIME_UP });
 		}
 
 		return () => {
 			if (intervalRef.current) {
 				clearInterval(intervalRef.current);
 			}
+			if (snackbarRef.current) {
+				closeSnackbar(snackbarRef.current);
+			}
 		};
-	}, [difficulty, timeUp]);
+	}, [difficulty, timerValue, dispatch]);
 
 	return (
 		<div className={styles.timer}>
-			<progress ref={countRef} max={100} />
+			<progress max={100} value={timerValue} />
 		</div>
 	);
 };

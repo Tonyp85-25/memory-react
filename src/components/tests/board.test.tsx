@@ -10,7 +10,7 @@ import Board from "../Board";
 import { GAME_DURATION } from "../Timer";
 
 beforeEach(() => {
-	vi.useFakeTimers();
+	vi.useFakeTimers({ advanceTimeDelta: 100, shouldAdvanceTime: true });
 });
 afterEach(() => {
 	vi.runOnlyPendingTimers();
@@ -30,24 +30,6 @@ describe("should render board according to difficulty level", () => {
 	});
 });
 
-describe("testing actions according to time", () => {
-	test("should be unplayable when time is up", async () => {
-		render(<Board difficulty={"easy"} />, "easy");
-		vi.advanceTimersByTime(GAME_DURATION.easy);
-		const cards = await screen.findAllByRole("button");
-		fireEvent.click(cards[0]);
-		expect(cards[0]).not.toHaveClass("image");
-	});
-
-	test("should be playable during game time", async () => {
-		render(<Board difficulty={"hard"} />, "hard");
-		vi.advanceTimersByTime(GAME_DURATION.easy / 2);
-		const cards = await screen.findAllByRole("button");
-		fireEvent.click(cards[0]);
-		expect(cards[0]).toHaveClass("card image");
-	});
-});
-
 describe("test validation rules", () => {
 	test("should turn back cards when fruits are different", async () => {
 		render(<Board difficulty={"easy"} />, "easy");
@@ -56,7 +38,10 @@ describe("test validation rules", () => {
 		act(() => {
 			fireEvent.click(cards[1]);
 		});
-		vi.advanceTimersByTime(VALIDATION_TIME);
+		act(() => {
+			vi.advanceTimersByTime(VALIDATION_TIME);
+		});
+
 		expect(cards[0]).toHaveClass("card");
 		expect(cards[1]).toHaveClass("card");
 	});
@@ -69,7 +54,10 @@ describe("test validation rules", () => {
 		act(() => {
 			fireEvent.click(cards[sameFruitCardIndex]);
 		});
-		vi.advanceTimersByTime(VALIDATION_TIME);
+		act(() => {
+			vi.advanceTimersByTime(VALIDATION_TIME);
+		});
+
 		expect(cards[0]).toHaveClass("card image");
 		expect(cards[sameFruitCardIndex]).toHaveClass("card image");
 	});

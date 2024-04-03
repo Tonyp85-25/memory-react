@@ -1,10 +1,10 @@
 import { type RenderOptions, render } from "@testing-library/react";
 import { SnackbarProvider } from "notistack";
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
 import { GameProvider } from "../contexts/GameContext";
 import type { Difficulty } from "../types";
 
-const testFn = (cards: unknown[]) => cards;
+export const testFn = (cards: unknown[]) => cards;
 
 const EasyGameProvider = ({ children }: { children: ReactElement }) => {
 	return (
@@ -26,7 +26,7 @@ const HardGameProvider = ({ children }: { children: ReactElement }) => {
 	);
 };
 const renderWithContext = (
-	ui: ReactElement,
+	ui: ReactNode,
 	difficulty: Difficulty,
 	options?: RenderOptions,
 ) => {

@@ -1,14 +1,6 @@
-import { SnackbarKey, useSnackbar } from "notistack";
-import {
-	type Dispatch,
-	type ReactElement,
-	createContext,
-	useEffect,
-	useRef,
-} from "react";
+import { type Dispatch, type ReactElement, createContext } from "react";
 import { useImmerReducer } from "use-immer";
 import { ActionTypes, withThunk } from "../actions";
-import { GAME_DURATION } from "../components/Timer";
 import { areFruitsDifferent, getPosition } from "../helpers";
 import type { GameOptions } from "../types";
 import {
@@ -24,8 +16,8 @@ export const NUMBER_OF_CARDS = {
 };
 
 export const GameStateContext = createContext<GameState>({} as GameState);
-export const GameDispatchContext = createContext<Dispatch<GameAction> | null>(
-	null,
+export const GameDispatchContext = createContext<Dispatch<GameAction>>(
+	() => null,
 );
 
 const cardStyles = {
@@ -68,29 +60,6 @@ export function GameProvider({
 		options,
 		getInitialGameState,
 	);
-	const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-	const { difficulty } = options;
-	const { enqueueSnackbar } = useSnackbar();
-
-	useEffect(() => {
-		timeoutRef.current = setTimeout(() => {
-			dispatch({ type: ActionTypes.TIME_UP });
-		}, GAME_DURATION[difficulty]);
-
-		if (game.score === NUMBER_OF_CARDS[difficulty] / 2) {
-			enqueueSnackbar("You won!", {
-				variant: "success",
-				anchorOrigin: { vertical: "bottom", horizontal: "center" },
-				preventDuplicate: true,
-			});
-			dispatch({ type: ActionTypes.SUCCESS });
-		}
-		return () => {
-			if (timeoutRef.current) {
-				clearTimeout(timeoutRef.current);
-			}
-		};
-	}, [difficulty, dispatch, game.score, enqueueSnackbar]);
 
 	if (game === null) {
 		return null;
@@ -137,7 +106,9 @@ function gameReducer(game: GameState, action: GameAction) {
 			return game;
 		}
 		case ActionTypes.TIME_UP: {
-			return { ...game, canClick: false, message: "Game over!", timeUp: true };
+			game.canClick = false;
+			game.timeUp = true;
+			return game;
 		}
 		default:
 			return game;

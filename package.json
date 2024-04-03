@@ -1,56 +1,63 @@
 {
-	"name": "memory-react",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@picocss/pico": "^1.5.11",
-		"immer": "^10.0.4",
-		"notistack": "^3.0.1",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"react-router-dom": ">=5.0.0 <6.0.0",
-		"use-immer": "^0.9.0"
-	},
-	"scripts": {
-		"start": "vite --force",
-		"build": "tsc && vite build",
-		"serve": "vite preview",
-		"test": "vitest",
-		"test_ci": "vitest run",
-		"tsc": "tsc",
-		"lint": "biome lint ./src",
-		"format": "biome format ./src --write",
-		"check": "biome check ./src"
-	},
-	"browserslist": {
-		"production": [">0.2%", "not dead", "not op_mini all"],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.6.3",
-		"@testing-library/dom": "^9.3.3",
-		"@testing-library/jest-dom": "^6.1.4",
-		"@testing-library/react": "^12.1.5",
-		"@testing-library/user-event": "^14.5.1",
-		"@types/react": "17",
-		"@types/react-dom": "17",
-		"@types/react-router-dom": "5",
-		"@vitejs/plugin-react": "4.2.1",
-		"csstype": "^3.0.10",
-		"identity-obj-proxy": "^3.0.0",
-		"jsdom": "^24.0.0",
-		"sass": "^1.69.6",
-		"typescript": "^5.2.2",
-		"vite": "5.2.7",
-		"vite-plugin-svgr": "4.2.0",
-		"vitest": "^1.4.0"
-	},
-	"peerDependencies": {
-		"@testing-library/dom": "^9.3.3",
-		"csstype": "^3.0.10"
-	}
+  "name": "memory-react",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@picocss/pico": "^1.5.13",
+    "immer": "^10.0.4",
+    "notistack": "^3.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
+    "use-immer": "^0.9.0"
+  },
+  "scripts": {
+    "start": "vite --force",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
+    "test": "vitest",
+    "test_ci": "vitest run",
+    "tsc": "tsc",
+    "lint": "biome lint ./src",
+    "format": "biome format ./src --write",
+    "check": "biome check ./src"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.6.3",
+    "@playwright/test": "^1.42.1",
+    "@testing-library/dom": "^9.3.4",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.2",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/node": "^20.12.3",
+    "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.23",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "4.2.1",
+    "csstype": "^3.1.3",
+    "identity-obj-proxy": "^3.0.0",
+    "jsdom": "^24.0.0",
+    "sass": "^1.72.0",
+    "typescript": "^5.4.3",
+    "vite": "5.2.7",
+    "vite-plugin-svgr": "4.2.0",
+    "vitest": "^1.4.0"
+  },
+  "peerDependencies": {
+    "@testing-library/dom": "^9.3.3",
+    "csstype": "^3.0.10"
+  }
 }
