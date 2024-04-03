@@ -13,6 +13,7 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
+    exclude: ["**/*.spec.ts", "./node_modules/**"],
   },
   plugins: [
     react(),
